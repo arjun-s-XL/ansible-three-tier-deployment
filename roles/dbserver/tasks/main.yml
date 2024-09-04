@@ -1,0 +1,22 @@
+---
+- name: install mysql server
+  apt:
+    name: mysql server
+    state: present
+
+- name: ensure mysql is running
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+
+- name: setup mysql root password
+  mysql_user:
+    name: root
+    password: "{{mysql_root_password}}"
+    host: localhost
+    state: present
+
+  vars:
+    mysql_root_password: root
+# tasks file for dbserver

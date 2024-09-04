@@ -1,0 +1,12 @@
+---
+- name: Install web server packages
+  apt:
+    name: "nginx"
+    state: present
+
+- name:
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+# tasks file for webserver
