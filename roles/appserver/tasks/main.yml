@@ -1,17 +1,17 @@
 ---
-- name: Install pythin packages
+- name: Install python3
   apt:
     name: python3
     state: present
 
-- name: Install flask
+- name: Install python3-pip
+  apt:
+    name: python3-pip
+    state: present
+
+- name: Install Flask using pip
   pip:
     name: flask
     state: present
+    executable: pip3
 
-
-- name: Start Flask application
-  command: python3 /home/USER/app.py
-  async: 0
-  poll: 0
-      # tasks file for appserver

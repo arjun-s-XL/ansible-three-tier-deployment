@@ -1,15 +1,15 @@
 ---
 - hosts: web
-  become: True
+  become: true
   roles:
     - webserver
 
 - hosts: app
-  become: True
+  become: true
   roles:
     - appserver
 
 - hosts: db
-  become: True
+  become: true
   roles:
     - dbserver

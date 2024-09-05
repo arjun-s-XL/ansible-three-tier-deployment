@@ -1,12 +1,38 @@
 ---
-- name: Install web server packages
+- name: Ensure Apache is installed
   apt:
-    name: "nginx"
+    name: apache2
     state: present
+  become: yes
 
-- name:
+- name: Ensure Apache service is running
   service:
-    name: nginx
+    name: apache2
     state: started
     enabled: yes
+  become: yes
+
+- name: Copy default Apache index.html
+  copy:
+    dest: /var/www/html/index.html
+    content: |
+      <html>
+      <head><title>Welcome to Apache!</title></head>
+      <body>
+      <h1>Success! The Apache web server is installed and working.</h1>
+      </body>
+      </html>
+    owner: www-data
+    group: www-data
+    mode: '0644'
+  become: yes
+
+- name: Ensure Apache is listening on port 80
+  lineinfile:
+    path: /etc/apache2/ports.conf
+    regexp: '^Listen '
+    line: 'Listen 80'
+    state: present
+  become: yes
+
 # tasks file for webserver
