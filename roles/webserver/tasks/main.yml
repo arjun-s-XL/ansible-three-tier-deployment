@@ -12,16 +12,10 @@
     enabled: yes
   become: yes
 
-- name: Copy default Apache index.html
+- name: Copy custom index.html from role files directory
   copy:
+    src: index.html
     dest: /var/www/html/index.html
-    content: |
-      <html>
-      <head><title>Welcome to Apache!</title></head>
-      <body>
-      <h1>Success! The Apache web server is installed and working.</h1>
-      </body>
-      </html>
     owner: www-data
     group: www-data
     mode: '0644'
@@ -31,8 +25,9 @@
   lineinfile:
     path: /etc/apache2/ports.conf
     regexp: '^Listen '
-    line: 'Listen 80'
+    line: 'Listen 8080'
     state: present
   become: yes
+
 
 # tasks file for webserver
